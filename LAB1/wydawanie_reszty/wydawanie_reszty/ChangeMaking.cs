@@ -26,8 +26,13 @@ namespace ASD
         /// </remarks>
         public int? NoLimitsDynamic(int amount, int[] coins, out int[] change)
         {
-            change = null;  // zmienić
-            return -1;      // zmienić
+            List<int> dp = new List<int>(amount+1);
+            for (int i = 0; i < coins.Length; i++)
+            {
+                dp[coins[i]] = 1; // umiemy wydac za pomoca jednej monety kazda kwote z coins
+            }
+            
+            
         }
 
         /// <summary>
