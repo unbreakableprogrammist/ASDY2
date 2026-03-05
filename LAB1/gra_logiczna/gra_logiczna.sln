@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gra_logiczna", "gra_logiczna\gra_logiczna.csproj", "{CCB40FB3-DE15-47A0-B13B-3D3869079506}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCB40FB3-DE15-47A0-B13B-3D3869079506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCB40FB3-DE15-47A0-B13B-3D3869079506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCB40FB3-DE15-47A0-B13B-3D3869079506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCB40FB3-DE15-47A0-B13B-3D3869079506}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
