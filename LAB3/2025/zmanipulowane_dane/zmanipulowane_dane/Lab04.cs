@@ -20,11 +20,28 @@ namespace ASD
         /// numberOfInfectedServices: liczba zainfekowanych serwisów,
         /// listOfInfectedServices: tablica zawierająca numery zainfekowanych serwisów w kolejności rosnącej.
         /// </returns>
+        ///
+        void Depth_DFS(int v,int[] depth,bool[] odwiedzone,Graph G,int glebokosc)
+        {
+            depth[v] = glebokosc;
+            odwiedzone[v] = true;
+            foreach (int i in 
+            
+        }
         public (int numberOfInfectedServices, int[] listOfInfectedServices) Stage1(Graph G, int K, int s)
         {
             int n = G.VertexCount;
             int m = G.EdgeCount;
-
+            // to zadanie mozna zrobic tak ze poporstu w DFS dodawac "glebokosc" czyli jak odlegle od naszego miejsca jest 
+            int[] depth = new int[n];
+            bool[] odwiedzone = new bool[n];
+            Array.Fill(odwiedzone, false);
+            Array.Fill(depth, 0); 
+            Depth_DFS(s,depth,odwiedzone,G,1);
+            
+            
+            
+            
             return (int.MaxValue, null);
         }
 
