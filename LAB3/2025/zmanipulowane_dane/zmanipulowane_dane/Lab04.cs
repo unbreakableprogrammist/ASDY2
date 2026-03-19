@@ -21,12 +21,27 @@ namespace ASD
         /// listOfInfectedServices: tablica zawierająca numery zainfekowanych serwisów w kolejności rosnącej.
         /// </returns>
         ///
-        void Depth_DFS(int v,int[] depth,bool[] odwiedzone,Graph G,int glebokosc)
+        void Depth_BFS(int v,int[] depth,bool[] odwiedzone,Graph G)
         {
-            depth[v] = glebokosc;
-            odwiedzone[v] = true;
-            foreach (int i in 
-            
+            depth[v] = 1;
+            Queue<Tuple<int,int>> queue = new Queue<Tuple<int, int>>();
+            queue.Enqueue(new Tuple<int,int>(v,depth[v]));
+            while (queue.Count != 0)
+            {
+                Tuple<int, int> tuple = queue.Dequeue();
+                v = tuple.Item1;
+                int d = tuple.Item2;
+                odwiedzone[v] = true;
+                foreach (var u in G.OutNeighbors(v))
+                {
+                    if (!odwiedzone[u]) // jesli wierzcholek nie jest odwiedzony 
+                    {
+                        odwiedzone[u] = true;
+                        depth[u] = depth[v] + 1;
+                        queue.Enqueue(new Tuple<int,int>(u,depth[u]));
+                    }
+                }
+            }
         }
         public (int numberOfInfectedServices, int[] listOfInfectedServices) Stage1(Graph G, int K, int s)
         {
@@ -37,12 +52,18 @@ namespace ASD
             bool[] odwiedzone = new bool[n];
             Array.Fill(odwiedzone, false);
             Array.Fill(depth, 0); 
-            Depth_DFS(s,depth,odwiedzone,G,1);
-            
-            
-            
-            
-            return (int.MaxValue, null);
+            Depth_BFS(s,depth,odwiedzone,G);
+            List<int> listOfInfectedServices = new List<int>();
+            int ile = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if (odwiedzone[i] == true && depth[i] <= K)
+                {
+                    ile += 1;
+                    listOfInfectedServices.Add(i);
+                }
+            }
+            return (ile,listOfInfectedServices.ToArray());
         }
 
         /// <summary>
