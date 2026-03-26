@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zadanie_labirynt", "zadanie_labirynt\zadanie_labirynt.csproj", "{45759EBC-1748-414C-9AAE-63297959C19E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45759EBC-1748-414C-9AAE-63297959C19E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45759EBC-1748-414C-9AAE-63297959C19E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45759EBC-1748-414C-9AAE-63297959C19E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45759EBC-1748-414C-9AAE-63297959C19E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
