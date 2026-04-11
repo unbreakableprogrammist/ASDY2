@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("gra_logiczna")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4dd1f5865eeffb53e29a67e8f860a1c7c095ba20")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7bd63234e57c985beef6f8f99c14494e8159662a")]
 [assembly: System.Reflection.AssemblyProductAttribute("gra_logiczna")]
 [assembly: System.Reflection.AssemblyTitleAttribute("gra_logiczna")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
