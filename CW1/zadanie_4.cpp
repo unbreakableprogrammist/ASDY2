@@ -27,7 +27,7 @@ int main(){
     }
     
 	  int naj = dp[n][m];
-	  int wynik = s1.lenght() - naj + s2.lenght() - naj;
+	  int wynik = slowo1.length() - naj + slowo2.length() - naj;
 	  cout<<wynik; 
     return 0;
 }
