@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("spojnosc_krawedziowa")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f57caf1fbb5379305964b5b914aee0115eb26a7d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9cb7aa715c795913fa47903fc4e983d2e14d7734")]
 [assembly: System.Reflection.AssemblyProductAttribute("spojnosc_krawedziowa")]
 [assembly: System.Reflection.AssemblyTitleAttribute("spojnosc_krawedziowa")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

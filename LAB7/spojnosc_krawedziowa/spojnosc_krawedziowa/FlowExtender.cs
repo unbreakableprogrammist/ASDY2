@@ -102,8 +102,22 @@ namespace ASD
         /// <returns>spójność krawędziowa</returns>
         public static int EdgeConnectivity(this Graph<double> undirectedGraph, out Edge<double>[] cutingSet)
         {
+            // wybieramy sobie randomowo jeden wierzcholek 
+            int s = 0;
+            double min_cut = int.MaxValue;
             cutingSet = null;
-            return 0;
+            Edge<double>[] cutEdges = new Edge<double>[s];
+            for (int i = 1; i < undirectedGraph.VertexCount; i++)
+            {
+                double now = MinCut(undirectedGraph,s,i,out cutEdges);
+                if (now < min_cut)
+                {
+                    min_cut = now;
+                    cutingSet = cutEdges;
+                }
+            }
+
+            return (int)Math.Round(min_cut);
         }
         
     }
