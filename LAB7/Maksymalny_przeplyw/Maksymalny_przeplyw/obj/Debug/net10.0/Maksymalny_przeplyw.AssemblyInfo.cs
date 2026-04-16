@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Maksymalny_przeplyw")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+084372441f076cedefa858f704f63617c92b6779")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec052e440a637d4ac096fa43ee5d5dd4fbf8ca4a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Maksymalny_przeplyw")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Maksymalny_przeplyw")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
