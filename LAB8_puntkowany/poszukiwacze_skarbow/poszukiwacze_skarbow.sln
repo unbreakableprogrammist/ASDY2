@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "poszukiwacze_skarbow", "poszukiwacze_skarbow\poszukiwacze_skarbow.csproj", "{734BB8D5-DFB5-4B66-B75E-676726A20613}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{734BB8D5-DFB5-4B66-B75E-676726A20613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{734BB8D5-DFB5-4B66-B75E-676726A20613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{734BB8D5-DFB5-4B66-B75E-676726A20613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{734BB8D5-DFB5-4B66-B75E-676726A20613}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
