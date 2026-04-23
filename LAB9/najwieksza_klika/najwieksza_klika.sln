@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "najwieksza_klika", "najwieksza_klika\najwieksza_klika.csproj", "{4155B481-1260-4C49-922D-EA0D0E311A23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4155B481-1260-4C49-922D-EA0D0E311A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4155B481-1260-4C49-922D-EA0D0E311A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4155B481-1260-4C49-922D-EA0D0E311A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4155B481-1260-4C49-922D-EA0D0E311A23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
