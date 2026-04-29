@@ -71,36 +71,37 @@ public static class Lab10GraphExtender
     ///
     static bool IsConsistent(int k, int v, int[] map, Graph<int> g, Graph<int> h)
     {
-        // Stopnie muszą się zgadzać
+        // na pewno wierzcholki musza miec te same stopnie 
         if (g.OutNeighbors(v).Count() != h.OutNeighbors(k).Count()) return false;
-
+        
+        // idziemy po wszystkich juz sprawdzonych wierzcholkach 
         for (int j = 0; j < k; j++)
         {
-            bool hMaKrawedz = h.HasEdge(k, j);
+            bool hMaKrawedz = h.HasEdge(k, j); 
             bool gMaKrawedz = g.HasEdge(v, map[j]);
 
-            if (hMaKrawedz != gMaKrawedz) return false;
-
-            if (hMaKrawedz)
+            if (hMaKrawedz != gMaKrawedz) return false; // jesli jakis ma a drugi nie to na pewno nie zgodne 
+            if (hMaKrawedz) // jesli h ( a wiec i g tez ) ma krawedz 
             {
-                if (h.GetEdgeWeight(k, j) != g.GetEdgeWeight(v, map[j]))
+                if (h.GetEdgeWeight(k, j) != g.GetEdgeWeight(v, map[j])) // jesli wagi sa rozne to ble 
                     return false;
             }
         }
         return true;
     }
-
+    // n - liczba wierz, k - do k-tego wierzcholka z g szukamy dopasowania, uzyte - uzyte wierz wczesniej
     public static bool GeneratePermutations(int n, int k, bool[] uzyte, Graph<int> g, Graph<int> h, int[] map)
     {
-        if (k == n) return true;
+        // jesli doszlismy do konca to finito ( ostatni wierzcholek to n-1
+        if (k == n) return true; 
         for (int i = 0; i < n; i++)
         {
             if (uzyte[i]) continue;
-            if (IsConsistent(k, i, map, g, h))
+            if (IsConsistent(k, i, map, g, h)) // sprawdzamy czy te dwa wierzchoki sa ze soba zgodne 
             {
                 map[k] = i;
                 uzyte[i] = true;
-                if (GeneratePermutations(n, k + 1, uzyte, g, h, map))
+                if (GeneratePermutations(n, k + 1, uzyte, g, h, map)) 
                     return true;
                 uzyte[i] = false;
             }
