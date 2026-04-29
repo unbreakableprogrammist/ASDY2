@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("najwieksza_klika")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f48adeac5e4afb229138e412e9c2e818b5fe57c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f6d8bf3a99824c62e45fcf1604b575b018349f57")]
 [assembly: System.Reflection.AssemblyProductAttribute("najwieksza_klika")]
 [assembly: System.Reflection.AssemblyTitleAttribute("najwieksza_klika")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
