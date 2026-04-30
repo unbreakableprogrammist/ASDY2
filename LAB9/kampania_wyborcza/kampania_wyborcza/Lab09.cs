@@ -46,27 +46,26 @@ namespace ASD
         /// Liczba mieszkańców, z którymi spotka się kandydat.
         /// </returns>
 
-        static int[] _population;
+        static int[] _population;          // populacja w każdym mieście, _population[i] = liczba mieszkańców miasta i
+        static double[] _meetingCosts;     // koszt organizacji spotkania, _meetingCosts[i] = koszt spotkania w mieście i
+        static Graph<int> _cities;         // graf miast, wagi krawędzi = koszt podróży między miastami
+        static int _capital;               // numer wierzchołka stolicy (miasto startowe)
+        static bool[] _visited;            // _visited[i] = true jeśli miasto i już odwiedzone w aktualnej ścieżce
 
-        static double[] _meetingCosts;
-        static Graph<int> _cities;
-        static int _capital;
-        static bool[] _visited;
-
-        static int _bestPopulation;
-        static double _bestCost;
-        static List<(int, bool)> _bestPath;
+        static int _bestPopulation;        // najlepsza (największa) liczba mieszkańców znaleziona do tej pory
+        static double _bestCost;           // koszt ścieżki dającej _bestPopulation (przy remisie wybieramy tańszą)
+        static List<(int, bool)> _bestPath; // najlepsza ścieżka: (numer miasta, czy organizujemy spotkanie)
 
         static void Backtrack(int current, double budgetLeft, List<(int, bool)> currentPath,
             int currentPopulation, double currentCost, bool withMeetingCosts)
         {
             // aktualna ścieżka jest zawsze potencjalnym wynikiem
-            // (już jesteśmy w jakimś mieście i możemy tu skończyć jeśli możemy wrócić)
-            bool moznaWrocic = current == _capital ||
+            // sprawdzamy czy po porstu z naszego miasta mozemy wrocic 
+            bool moznaWrocic = (current == _capital) ||
                                (_cities.HasEdge(current, _capital) &&
                                 _cities.GetEdgeWeight(current, _capital) <= budgetLeft);
 
-            if (moznaWrocic)
+            if (moznaWrocic) // jesli z naszego miasta mozemy wrocic to 
             {
                 if (currentPopulation > _bestPopulation ||
                     (currentPopulation == _bestPopulation && currentCost < _bestCost))
@@ -80,6 +79,7 @@ namespace ASD
             // próbuj każde sąsiednie miasto
             foreach (var neighbor in _cities.OutNeighbors(current))
             {
+                // jesli jakis sasiad juz byl odwiedzony to pass 
                 if (_visited[neighbor]) continue;
 
                 double kosztPrzejazdu = _cities.GetEdgeWeight(current, neighbor);
@@ -118,7 +118,6 @@ namespace ASD
                         currentPath.RemoveAt(currentPath.Count - 1);
                     }
                 }
-
                 _visited[neighbor] = false;
             }
         }
