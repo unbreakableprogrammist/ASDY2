@@ -2,14 +2,14 @@ using ASD.Graphs;
 
 public class Lab10 : MarshalByRefObject
 {
-    static bool[] visited;      // czy wierzchołek jest już na ścieżce
-    static int[] colors;        // kolory wierzchołków
-    static Graph g;             
-    static int bridge;          // wierzchołek łączący obie połówki (s2)
-    
-    static int[] bestPath;      // najlepsza znaleziona ścieżka (tablica wierzchołków)
-    static List<int> half1;     // aktualna pierwsza połówka ścieżki
-    static List<int> half2;     // aktualna druga połówka ścieżki
+    static bool[] visited;
+    static int[] colors;
+    static Graph g;
+    static int bridge;          // s2 = początek drugiej połówki
+
+    static int[] bestPath;
+    static List<int> half1;     // pierwsza połówka: s1 -> ... -> u
+    static List<int> half2;     // druga połówka:   s2 -> ... -> v
 
     static void SyncDFS(int u, int v)
     {
@@ -21,27 +21,22 @@ public class Lab10 : MarshalByRefObject
             {
                 if (visited[nv]) continue;
                 if (nu == nv) continue;
-                if (colors[nu] != colors[nv]) continue; // kolory muszą się zgadzać
+                if (colors[nu] != colors[nv]) continue;
 
                 visited[nu] = true;
                 visited[nv] = true;
                 half1.Add(nu);
                 half2.Add(nv);
 
-                // Sprawdź czy koniec pierwszej połówki łączy się z bridge
-                // Ścieżka: [half1] -> bridge -> [half2 odwrotnie]
+                // Pełna ścieżka: [s1,...,nu] -> [s2,...,nv]
+                // nu musi łączyć się z s2 (bridge) żeby ścieżka była spójna
                 if (g.HasEdge(nu, bridge))
                 {
-                    // Zbuduj pełną ścieżkę: half1 + bridge + half2 odwrotnie
+                    // half1 + half2 = parzysta długość ✓
+                    // bo obie połówki mają zawsze taki sam rozmiar
                     var candidate = new List<int>(half1);
-                    candidate.Add(bridge);
-                    for (int i = half2.Count - 1; i >= 0; i--)
-                        candidate.Add(half2[i]);
+                    candidate.AddRange(half2);
 
-                    // Zapisz jeśli lepsza od dotychczasowej
-                    // Długość powtórzenia = half1.Count + 1 + half2.Count (parzysta)
-                    // ale uwaga: powtórzenie to [half1 + bridge] i [half2 odwrotnie + s2start]
-                    // Sprawdź czy candidate.Length > bestPath.Length
                     if (bestPath == null || candidate.Count > bestPath.Length)
                         bestPath = candidate.ToArray();
                 }
@@ -75,12 +70,11 @@ public class Lab10 : MarshalByRefObject
                 visited[s1] = true;
                 visited[s2] = true;
 
-                // Inicjuj połówki: s1 to pierwsza połówka, s2 to druga
                 half1 = new List<int> { s1 };
                 half2 = new List<int> { s2 };
 
-                // Bazowy przypadek: powtórzenie s1->s2
-                // Ścieżka: s1, s2 — długość 2
+                // Bazowy przypadek: ścieżka [s1, s2], długość 2
+                // s1 i s2 mają ten sam kolor, i są połączone krawędzią
                 if (g.HasEdge(s1, s2))
                 {
                     if (bestPath == null || 2 > bestPath.Length)
@@ -94,6 +88,6 @@ public class Lab10 : MarshalByRefObject
             }
         }
 
-        return bestPath; // null jeśli nie znaleziono żadnego powtórzenia
+        return bestPath;
     }
 }
