@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("szukanie_powtorzen_lab2025")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f2543d0524b382ff63e6ce63323be6f7668f88f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b446c1347ebe8d4c10429a7b16936b6435a14d3")]
 [assembly: System.Reflection.AssemblyProductAttribute("szukanie_powtorzen_lab2025")]
 [assembly: System.Reflection.AssemblyTitleAttribute("szukanie_powtorzen_lab2025")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
