@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("kanalizacja")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f97109dcab1e5491f1c0323209ad2bce256b5939")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae41e5a8705572e1e81b62d4eafa161def7716f2")]
 [assembly: System.Reflection.AssemblyProductAttribute("kanalizacja")]
 [assembly: System.Reflection.AssemblyTitleAttribute("kanalizacja")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
