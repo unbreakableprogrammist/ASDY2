@@ -507,7 +507,6 @@ namespace ASD
                 }
             }
             var reduced = Reduce(kopia);
-            // PreprocessSubdivisions(kopia);
             Backtrack2(kopia);
             Restore(reduced, kopia);
 
@@ -556,6 +555,7 @@ namespace ASD
                     }
                 }
             }
+            
             List<int> cycle_vertex = FindCycle(graph);
             
             if (cycle_vertex == null || cycle_vertex.Count == 0)
@@ -568,6 +568,10 @@ namespace ASD
                 Restore(reduced, graph);
                 return;
             }
+            
+            // Odfiltrowujemy bezsensowne wierzchołki o stopniu 2
+            cycle_vertex = FilterCycle(cycle_vertex);
+
             cycle_vertex.Sort(_degreeComparer);
 
             var newForbidden = new List<int>();
@@ -583,6 +587,7 @@ namespace ASD
                     if (!Removed[u]) active_degree[u]--;
 
                 Backtrack2(graph);
+                
                 Removed[vert] = false;
                 active_degree[vert] = 0;
                 foreach (var u in graph.OutNeighbors(vert))
@@ -604,5 +609,37 @@ namespace ASD
             foreach (var f in newForbidden) forbiden[f] = false;
             Restore(reduced, graph);
         }
+        private List<int> FilterCycle(List<int> cycle)
+        {
+            List<int> filtered = new List<int>();
+            int bestDeg2 = -1;
+            int minCost = int.MaxValue;
+
+            foreach (int v in cycle)
+            {
+                if (active_degree[v] == 2)
+                {
+                    if (v_costs[v] < minCost)
+                    {
+                        minCost = v_costs[v];
+                        bestDeg2 = v;
+                    }
+                }
+            }
+            foreach (int v in cycle)
+            {
+                if (active_degree[v] > 2)
+                {
+                    filtered.Add(v); 
+                }
+                else if (v == bestDeg2)
+                {
+                    filtered.Add(v); 
+                }
+            }
+
+            return filtered;
+        }
     }
+    
 }
