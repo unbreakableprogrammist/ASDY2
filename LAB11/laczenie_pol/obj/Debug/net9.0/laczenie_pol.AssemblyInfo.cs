@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("laczenie_pol")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+374b274ab3ad5228239ff6abc0e7fb44b24fe4aa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71d4cee379f8d8fcd648cf09f1c1b9fbf6b4b344")]
 [assembly: System.Reflection.AssemblyProductAttribute("laczenie_pol")]
 [assembly: System.Reflection.AssemblyTitleAttribute("laczenie_pol")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

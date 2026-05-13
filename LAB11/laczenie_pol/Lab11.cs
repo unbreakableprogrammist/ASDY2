@@ -127,7 +127,7 @@ namespace ASD
             int indx_max2 = 0;
             for (int i = 0; i < poly2.Length; i++)
             {
-                if (poly2[i].Item1 < poly2[indx_min2].Item1 || (poly2[i].Item1 == poly2[i].Item1 && poly2[i].Item2 < poly2[indx_min2].Item2))
+                if (poly2[i].Item1 < poly2[indx_min2].Item1 || (poly2[i].Item1 == poly2[indx_min2].Item1 && poly2[i].Item2 < poly2[indx_min2].Item2))
                 {
                     indx_min2 = i;
                 }
@@ -185,9 +185,6 @@ namespace ASD
                 }
             }
 
-            // Dodajemy na sam koniec ostatnie skrajnie prawe punkty (bo pętla zatrzymała się na indx_max)
-            if (!lower_sorted.Contains(poly1[indx_max1])) lower_sorted.Add(poly1[indx_max1]);
-            if (!lower_sorted.Contains(poly2[indx_max2])) lower_sorted.Add(poly2[indx_max2]);
 
             List<(double, double)> higher_sorted = new List<(double, double)>();
 
@@ -216,7 +213,7 @@ namespace ASD
                 {
                     // Sprawdzamy, kto ma mniejszy X (lub kto jest WYŻEJ w przypadku remisu)
                     if (poly1[curr1].Item1 < poly2[curr2].Item1 || 
-                        (poly1[curr1].Item1 == poly2[curr2].Item1 && poly1[curr1].Item2 > poly2[curr2].Item2))
+                        (poly1[curr1].Item1 == poly2[curr2].Item1 && poly1[curr1].Item2 < poly2[curr2].Item2))
                     {
                         higher_sorted.Add(poly1[curr1]);
                         if (curr1 == indx_max1) done1 = true;
@@ -235,6 +232,7 @@ namespace ASD
             if (!higher_sorted.Contains(poly1[indx_max1])) higher_sorted.Add(poly1[indx_max1]);
             if (!higher_sorted.Contains(poly2[indx_max2])) higher_sorted.Add(poly2[indx_max2]);
 
+            // wyznaczamy otoczke dla dolu
             Stack<(double, double)> lowerStock = new Stack<(double, double)>();
             foreach (var p in lower_sorted)
             {
@@ -246,8 +244,43 @@ namespace ASD
                     lowerStock.Push(ostatni); // tu oznacza ze wszystko jest ok (skrecamy w lewo) 
                     break;
                 }
+                lowerStock.Push(p);
             }
-        
+            Stack<(double, double)> higherStock = new Stack<(double, double)>();
+            foreach (var p in higher_sorted)
+            { 
+                while (higherStock.Count >= 2)
+                {
+                    var ostatni = higherStock.Pop();
+                    var przedostatni = higherStock.Peek();
+                    if(Cross(przedostatni,ostatni,p) >= 0) continue; // jesli wygina sie w prawo to continue
+                    higherStock.Push(ostatni);
+                    break;
+                }
+                higherStock.Push(p);
+            }
+            // stosy sa odwrotne -> na dole stosu maksymalny w lewo 
+            var finalLower = lowerStock.Reverse().ToList(); // odwracamy bo stos jest od gory najbardziej na prawo 
+            var finalHigher = higherStock.ToList();
+            List<(double, double)> result = new List<(double, double)>();
+            // Dodajemy całą dolną otoczkę
+            result.AddRange(finalLower);
+
+            for (int i = 0; i < finalHigher.Count; i++)
+            {
+                var pt = finalHigher[i];
+    
+                // Nie dodajemy punktu, jeśli jest taki sam jak ten na samym końcu (zapobiega duplikatom z prawej strony)
+                if (result.Count > 0 && result[result.Count - 1] == pt) continue;
+    
+                // Nie dodajemy punktu, jeśli jest taki sam jak punkt startowy (zapobiega duplikatom z lewej strony)
+                if (result.Count > 0 && result[0] == pt) continue;
+
+                result.Add(pt);
+            }
+
+            // GOTOWE! Mamy jedną, wypukłą otoczkę w czasie liniowym O(n)
+            return result.ToArray();
         }
     }
 }
