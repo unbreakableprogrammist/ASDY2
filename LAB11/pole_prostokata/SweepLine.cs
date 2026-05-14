@@ -105,7 +105,88 @@ namespace ASD
         /// </param>
         public double RectanglesUnionArea(Geometry.Rectangle[] rectangles)
         {
-            return -1;
+            // Zabezpieczenie przed pustą tablicą
+            if (rectangles == null || rectangles.Length == 0) return 0;
+
+            List<SweepEvent> events = new List<SweepEvent>();
+
+            // 1. Zbieramy zdarzenia - tym razem nasza miotła jedzie w poziomie (od lewej do prawej)
+            // Zdarzeniami będą pionowe boki prostokątów (lewy i prawy)
+            for (int i = 0; i < rectangles.Length; i++)
+            {
+                events.Add(new SweepEvent(rectangles[i].MinX, true, i));   // Lewa krawędź otwiera prostokąt
+                events.Add(new SweepEvent(rectangles[i].MaxX, false, i));  // Prawa krawędź zamyka prostokąt
+            }
+
+            // 2. Sortujemy zdarzenia miotły od lewej do prawej (rosnąco po osi X)
+            events.Sort((a, b) =>
+            {
+                int cmp = a.Coord.CompareTo(b.Coord);
+                if (cmp == 0) 
+                {
+                    // Remis na osi X: tak samo jak w Etapie 1, najpierw otwieramy, potem zamykamy
+                    return b.IsStartingPoint.CompareTo(a.IsStartingPoint);
+                }
+                return cmp;
+            });
+
+            double totalArea = 0;
+            double previousX = events[0].Coord;
+            
+            // HashSet przechowuje indeksy prostokątów, pod którymi aktualnie znajduje się nasza miotła
+            HashSet<int> activeRectangles = new HashSet<int>();
+
+            // 3. Główna pętla miotły
+            foreach (var ev in events)
+            {
+                double currentX = ev.Coord;
+                
+                // Szerokość aktualnie rozpatrywanego paska (dystans od poprzedniego zatrzymania miotły)
+                double width = currentX - previousX;
+
+                // Sprawdzamy czy miotła przesunęła się w prawo i czy w ogóle mamy pod nią jakieś prostokąty
+                if (width > 0 && activeRectangles.Count > 0)
+                {
+                    // Tworzymy tablicę pionowych odcinków reprezentujących "przekrój" wszystkich
+                    // aktualnie otwartych prostokątów na tej współrzędnej X.
+                    Geometry.Segment[] activeSegments = new Geometry.Segment[activeRectangles.Count];
+                    int idx = 0;
+                    
+                    foreach (int rectIdx in activeRectangles)
+                    {
+                        var rect = rectangles[rectIdx];
+                        // Odcinek pionowy ma stałego X (currentX) i jest ograniczony w pionie przez MinY i MaxY prostokąta
+                        activeSegments[idx] = new Geometry.Segment(
+                            new Geometry.Point(currentX, rect.MinY),
+                            new Geometry.Point(currentX, rect.MaxY)
+                        );
+                        idx++;
+                    }
+
+                    // Wykorzystujemy funkcję z Etapu 1!
+                    // Daje nam ona całkowitą długość sumy aktywnych pionowych odcinków (bez duplikatów).
+                    // To jest wysokość (H) naszego aktualnego, pokrojonego paska.
+                    double height = VerticalSegmentsUnionLength(activeSegments);
+                    
+                    // Pole = podstawa * wysokość
+                    totalArea += width * height;
+                }
+
+                // Zapisujemy obecnego X jako punkt startowy dla kolejnego paska
+                previousX = currentX;
+
+                // Na samym końcu przetwarzamy zdarzenie - wciągamy prostokąt pod miotłę lub go wyrzucamy
+                if (ev.IsStartingPoint)
+                {
+                    activeRectangles.Add(ev.Idx);
+                }
+                else
+                {
+                    activeRectangles.Remove(ev.Idx);
+                }
+            }
+
+            return totalArea;
         }
 
     }
