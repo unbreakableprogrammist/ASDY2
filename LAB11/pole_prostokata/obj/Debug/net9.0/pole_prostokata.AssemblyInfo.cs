@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("pole_prostokata")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae41e5a8705572e1e81b62d4eafa161def7716f2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e3ba97fa76716a17e4dfd9e3477577c39c69c9c")]
 [assembly: System.Reflection.AssemblyProductAttribute("pole_prostokata")]
 [assembly: System.Reflection.AssemblyTitleAttribute("pole_prostokata")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
