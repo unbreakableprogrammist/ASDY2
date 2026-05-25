@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TestKogoziomka")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+10d670eb11b0d7f984d0e73643357ca8e706d0de")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43dc199278526e850f2564f99fb452df8a537e80")]
 [assembly: System.Reflection.AssemblyProductAttribute("TestKogoziomka")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TestKogoziomka")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

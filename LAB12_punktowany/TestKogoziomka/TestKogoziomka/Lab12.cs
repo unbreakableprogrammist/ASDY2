@@ -66,51 +66,52 @@ namespace ASD
         /// </returns>
         public double Stage2(double[][] samples)
         {
-            ///
-            /// pomysl : idziemy miotla od lewa do prawa w kazdym evencie wybieramy najmniejszy punkt i najwiekszy i wyliczamyu
-            /// maksimum i minimum ( w czasie K ) 
             int K = samples.Length;
-            bool all_done = false;
             int[] indexes = new int[K];
-            int[] dlugosci = new int[K];
             for (int i = 0; i < K; i++)
             {
-                dlugosci[i] = samples[i].Length;
+                indexes[i] = 0;
             }
-            Array.Fill(indexes, 0);
-            double max_wynik = 0.0;
+            bool all_done = false;
+            double D = 0.0;
             while (!all_done)
             {
-                double curr_wynik = 0.0;
-                double min_value = double.MaxValue;
-                int min_index = -1;
-                double maks_value = 0.0;
-                int max_index = -1;
-                for (int i = 0; i < K; i++)
-                {
-                    if ((double)indexes[i] / dlugosci[i] < min_value)
-                    {
-                        min_value = (double)indexes[i] / dlugosci[i];
-                        min_index = i;
-                    }
-
-                    if ((double)indexes[i] / dlugosci[i] > maks_value)
-                    {
-                        maks_value = (double)indexes[i] / dlugosci[i];
-                        max_index = i;
-                    }
-                }
-                curr_wynik = Math.Max(max_wynik, curr_wynik);
-                max_wynik = Math.Max(max_wynik, curr_wynik);
+                double min_value = Double.MaxValue;
                 all_done = true;
                 for (int i = 0; i < K; i++)
                 {
-                    if (indexes[i] <= min_index) indexes[i]++;
-                    if(indexes[i] < dlugosci[i]) all_done = false; 
+                    if (indexes[i] < samples[i].Length) // jesli gdzies nie doszlismy do konca
+                    {
+                        all_done = false;
+                        if (min_value > samples[i][indexes[i]])
+                        {
+                            min_value = samples[i][indexes[i]];
+                        }
+                    }
                 }
+                if(all_done) break;
+                
+                // teraz przesuwamy pozostale indeksy na nastepna wartosc 
+                for (int i = 0; i < K; i++)
+                {
+                    // przesuwamy indeksy tam gdzie bylismy na najmniejszej wartosci
+                    while (indexes[i] < samples[i].Length && samples[i][indexes[i]] == min_value)
+                    {
+                        indexes[i]++;
+                    }
+                }
+                double min_val = double.MaxValue; // pojemnik na najmniejsza wartosc 
+                double max_val = double.MinValue;
+                for (int i = 0; i < K; i++)
+                {
+                    double wart_dyst = (double)indexes[i] / samples[i].Length;
+                    
+                    min_val = Math.Min(min_val, wart_dyst);
+                    max_val = Math.Max(max_val, wart_dyst);
+                }
+                D = Math.Max(D, max_val - min_val);
             }
-
-            return max_wynik;
+            return D;
         }
 
         /// <summary>
@@ -129,7 +130,61 @@ namespace ASD
         /// </returns>
         public double Stage3(double[][] samples)
         {
-            return -1.0;
+            int K = samples.Length;
+            int[] indexes = new int[K];
+            // najpierw porownuje po double a pozniej po wartosci 
+            var comparer = Comparer<(double val, int id)>.Create((a, b) => {
+                int cmp = a.val.CompareTo(b.val);
+                if (cmp == 0) return a.id.CompareTo(b.id);
+                return cmp;
+            });
+
+            SortedSet<(double val, int id)> xSet = new SortedSet<(double val, int id)>(comparer); // x posortowane(nastepne dane wejsciowe) 
+            SortedSet<(double fraction, int id)> ySet = new SortedSet<(double fraction, int id)>(comparer); // y (wartosci dystrybuant ) 
+
+            for (int i = 0; i < K; i++)
+            {
+                indexes[i] = 0; // na poczatku wszystkie indeksy na 0
+                ySet.Add((0.0, i)); // na poczatku kazda dystrybuant jest na 0
+                xSet.Add((samples[i][0], i));
+            }
+            
+            double D = 0.0;
+            while (xSet.Count > 0)
+            {
+                // najmniejszy x
+                double min_x = xSet.Min.val;
+                // teraz bedziemy patrzec w jakich listach jeszcze musimy sie zupdateowac indeks ( zdejmujemy po porstu te  min_x)
+                List<int> arraysToUpdate = new List<int>();
+                while(xSet.Count > 0 && xSet.Min.val <= min_x)
+                {
+                    var min_x_elem = xSet.Min;
+                    xSet.Remove(min_x_elem);
+                    arraysToUpdate.Add(min_x_elem.id);
+                }
+
+                foreach (int i in arraysToUpdate)
+                {
+                    // patrzymy na stara dystrybuante i ja wywalamy z ySet 
+                    double stara_dyst = (double)indexes[i] / samples[i].Length;
+                    ySet.Remove((stara_dyst, i));
+                    // przesuwamy indeksy tam gdzie mniejsza wartosc jest
+                    while (indexes[i] < samples[i].Length && samples[i][indexes[i]] <= min_x)
+                    {
+                        indexes[i]++;
+                    }
+                    double nowaDystr = (double)indexes[i] / samples[i].Length;
+                    ySet.Add((nowaDystr, i));
+                    if (indexes[i] < samples[i].Length)
+                    {
+                        xSet.Add((samples[i][indexes[i]], i));
+                    }
+                }
+                double current_min_F = ySet.Min.fraction;
+                double current_max_F = ySet.Max.fraction;
+                D = Math.Max(D, current_max_F - current_min_F);
+            }
+            return D;
         }
     }
 }
