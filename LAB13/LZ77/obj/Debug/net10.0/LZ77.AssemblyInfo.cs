@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LZ77")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43dc199278526e850f2564f99fb452df8a537e80")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+786128b8f49539ac9914bbfdc2a8b4cbbacdff8e")]
 [assembly: System.Reflection.AssemblyProductAttribute("LZ77")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LZ77")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
