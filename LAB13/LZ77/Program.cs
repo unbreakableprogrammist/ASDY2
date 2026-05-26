@@ -85,12 +85,12 @@ namespace ASD
             string Performance = "PerformanceLab";
             TestSets[Performance] = new TestSet(solver, "Basic encoding performance tests (Lab)");
             // Podbite limity czasu z 5-7 sekund na 30-50 sekund!
-            TestSets[Performance].TestCases.Add(new EncodingTestCase(30.0, "19th Zimin word", makeZimin(19), int.MaxValue, 20));
-            TestSets[Performance].TestCases.Add(new EncodingTestCase(40.0, "Big random 1", makeRandom(10000, 3, 18), 2000, 1300));
-            TestSets[Performance].TestCases.Add(new EncodingTestCase(30.0, "(ababc)^n+x+(ababc)^n", repeat("ababc", 100000) + "x" + repeat("ababc", 100000), 50000, 6));
-            TestSets[Performance].TestCases.Add(new EncodingTestCase(50.0, "Mostly a, rare b", makeRandomMostlyA(100000, 1000, 17), 50000, 99));
-            TestSets[Performance].TestCases.Add(new EncodingTestCase(50.0, "Random islands", makeIslands(250000, 2, 2000, 19), int.MaxValue, 42));
-            TestSets[Performance].TestCases.Add(new EncodingTestCase(50.0, "Expanded islands", makeExpandedIslands(250000, 50, 30000, 20), int.MaxValue, 19));
+            TestSets[Performance].TestCases.Add(new EncodingTestCase(10.0, "19th Zimin word", makeZimin(19), int.MaxValue, 20));
+            TestSets[Performance].TestCases.Add(new EncodingTestCase(10.0, "Big random 1", makeRandom(10000, 3, 18), 2000, 1300));
+            TestSets[Performance].TestCases.Add(new EncodingTestCase(10.0, "(ababc)^n+x+(ababc)^n", repeat("ababc", 100000) + "x" + repeat("ababc", 100000), 50000, 6));
+            TestSets[Performance].TestCases.Add(new EncodingTestCase(10.0, "Mostly a, rare b", makeRandomMostlyA(100000, 1000, 17), 50000, 99));
+            TestSets[Performance].TestCases.Add(new EncodingTestCase(10.0, "Random islands", makeIslands(250000, 2, 2000, 19), int.MaxValue, 42));
+            TestSets[Performance].TestCases.Add(new EncodingTestCase(10.0, "Expanded islands", makeExpandedIslands(250000, 50, 30000, 20), int.MaxValue, 19));
             
         }
 
